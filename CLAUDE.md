@@ -99,3 +99,22 @@ Este repo viene con los **skills de ingeniería de Matt Pocock** instalados en
   donde ingerimos fuentes de terceros!).
 - **Manejo de errores explícito**; nunca tragar errores en silencio.
 - **TDD**, cobertura mínima 80%.
+
+---
+
+## Agent skills
+
+### Issue tracker
+
+Los issues y PRDs viven como **GitHub Issues** (CLI `gh`). Los **PRs externos también
+entran a la cola de triage**. Ver `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Vocabulario canónico por defecto (`needs-triage`, `needs-info`, `ready-for-agent`,
+`ready-for-human`, `wontfix`). Ver `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+**Single-context**: un `CONTEXT.md` + `docs/adr/` en la raíz del repo. Ver
+`docs/agents/domain.md`.
