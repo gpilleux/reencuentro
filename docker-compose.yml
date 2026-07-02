@@ -1,0 +1,17 @@
+# Postgres local para desarrollo y tests.
+# Imagen pgvector: trae la extensión `vector` además de las contrib estándar
+# (pg_trgm, unaccent). Puerto 54329 en el host para no chocar con un Postgres local.
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: reencuentro
+      POSTGRES_PASSWORD: reencuentro
+      POSTGRES_DB: reencuentro
+    ports:
+      - "54329:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reencuentro"]
+      interval: 2s
+      timeout: 2s
+      retries: 15

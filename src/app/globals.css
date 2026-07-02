@@ -1,0 +1,35 @@
+/* Estilos base mínimos del esqueleto. El sistema de diseño llega con las
+   slices de UI (2+); acá solo legibilidad y el aviso anti-estafa. */
+:root {
+  --color-text: #1a1a1a;
+  --color-background: #ffffff;
+  --color-accent: #0d6e5f;
+  --color-warning-bg: #fff7e6;
+  --color-warning-border: #e6a700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+.disclaimer {
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-top: 2rem;
+}

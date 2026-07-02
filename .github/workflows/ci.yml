@@ -1,0 +1,51 @@
+# CI de Reencuentro: lint + typecheck + tests (cobertura mínima 80%) + build.
+# Los tests de integración corren contra un Postgres real con pgvector,
+# igual que en desarrollo local (docker compose) y producción (Railway).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_USER: reencuentro
+          POSTGRES_PASSWORD: reencuentro
+          POSTGRES_DB: reencuentro
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd "pg_isready -U reencuentro"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://reencuentro:reencuentro@localhost:5432/reencuentro
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests con cobertura (mínimo 80%)
+        run: npm run test:coverage
+
+      - name: Build de producción
+        run: npm run build
